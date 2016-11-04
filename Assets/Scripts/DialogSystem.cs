@@ -14,6 +14,19 @@ public class DialogSystem : MonoBehaviour {
 	}
 
 
+
+    /*Setters */
+    public void SetImages(Image i1, Image i2) {
+        SetCharater1(i1);
+        SetCharater2(i2);
+    }
+    public void SetCharater1(Image i1) {
+        charater1 = i1;
+    }
+    public void SetCharater2(Image i2) {
+        charater2 = i2;
+    }
+
     public class DialogInterface {
         public static DialogInterface instance;
         private DialogInterface() { }
