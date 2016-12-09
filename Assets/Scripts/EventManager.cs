@@ -9,5 +9,5 @@ public class EventManager : MonoBehaviour {
     public void Test() {
         OnClick();
     }
-    
+
 }

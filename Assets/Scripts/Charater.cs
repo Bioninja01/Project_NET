@@ -3,36 +3,91 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Charater : MonoBehaviour {
+
+    public delegate void TalkAction(Charater c, GameObject go);
+    public static event TalkAction Talk;
+
+    public delegate void WalkAction();
+    public static event WalkAction Walk;
+
+    public enum CharState {
+        NORMAL,
+        TALKING
+    }
+
     /*Fields*/
     public List<Image> portraits;
-    public int debugLineSize;
+    public float viewAngle;
+    public CharState state = CharState.NORMAL;
 
-    /*SetUP*/
-    public void OnEnable() {
-        EventManager.OnClick += FrontAction;
-    }
-    public void OnDisable() {
-        EventManager.OnClick -= FrontAction;
-    }
+    List<GameObject> npcs;
+    bool axisInUse = false;
+    Rigidbody rd;
+    Quaternion oldRotation;
 
-    void Update() {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * debugLineSize;
-        Debug.DrawRay(transform.position, forward, Color.green);
+    void Awake() {
+        npcs = new List<GameObject>();
+        rd = GetComponent<Rigidbody>();
     }
 
-    /*Even tActions*/
-    public void MyAction() {
-        Debug.Log("test:1");
-    }
-
-    public void FrontAction() {
-        Debug.Log("test:2");
-        RaycastHit hit;
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        bool b = Physics.Raycast(transform.position, forward, out hit, debugLineSize);
-        if (b) {
-            string s = hit.transform.gameObject.ToString();
-            Debug.Log("The obj I hit: "+s);
+    void OnTriggerStay(Collider other) {
+        Vector3 distance2Other = other.gameObject.transform.position - transform.position;
+        float angle = Vector3.Angle(distance2Other, transform.TransformDirection(Vector3.forward));
+        if (other.gameObject.tag.Equals("NPC")) {
+            if(angle < viewAngle) {
+                if (!npcs.Contains(other.gameObject)) {
+                    npcs.Add(other.gameObject);
+                }
+            }
+            else {
+                if (npcs.Contains(other.gameObject)) {
+                    npcs.Remove(other.gameObject);
+                }
+            }
         }
     }
+    void OnTriggerExit(Collider other) {
+        if (npcs.Contains(other.gameObject)) {
+            npcs.Remove(other.gameObject);
+        }
+    }
+    void Update() {
+        switch (state) {
+            case CharState.NORMAL:
+                NormalMove();
+                break;
+            case CharState.TALKING:
+                break;
+        }
+    }
+
+    public void ResetPosition() {
+        transform.rotation = oldRotation;
+    }
+    private void NormalMove() {
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 190.0f;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * 10.0f;
+        if(x != 0 || z != 0) {
+            Walk();
+        }
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
+        rd.velocity = new Vector3(0, -9.8f, 0);
+        if (Input.GetAxis("Submit") != 0) {
+            if (axisInUse == false) {
+                axisInUse = true;
+                if (npcs.Count > 0) {
+                    oldRotation = transform.rotation;
+                    transform.LookAt(npcs[0].transform.position);
+                    npcs[0].transform.LookAt(transform.position);
+                    state = CharState.TALKING;
+                    Talk(this, npcs[0]);    //start talking
+                }
+            }
+        }
+        else {
+            axisInUse = false;
+        }
+    }
+
 }

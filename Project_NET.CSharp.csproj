@@ -78,11 +78,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Charater.cs" />
+    <Compile Include="Assets\Scripts\DeBugLine.cs" />
+    <Compile Include="Assets\Scripts\Dialog.cs" />
+    <Compile Include="Assets\Scripts\DialogStep.cs" />
     <Compile Include="Assets\Scripts\DialogSystem.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Grid.cs" />
+    <Compile Include="Assets\Scripts\Heap.cs" />
+    <Compile Include="Assets\Scripts\LineTest.cs" />
+    <Compile Include="Assets\Scripts\Markers.cs" />
+    <Compile Include="Assets\Scripts\MovementTest.cs" />
+    <Compile Include="Assets\Scripts\NPC.cs" />
+    <Compile Include="Assets\Scripts\NPC_Path.cs" />
+    <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\PathRequestManager.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding.cs" />
+    <Compile Include="Assets\Scripts\Patters.cs" />
+    <Compile Include="Assets\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Dialog\DevDialog_Girl.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />

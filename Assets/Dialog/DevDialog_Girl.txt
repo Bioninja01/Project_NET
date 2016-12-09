@@ -1,0 +1,2 @@
+girl1: Hello can I help you?
+girl1: No? Ok, By then.
