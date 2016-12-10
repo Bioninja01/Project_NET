@@ -4,13 +4,14 @@ using System;
 
 public class PathRequestManager : MonoBehaviour {
 
+    //Change to the true singleTon Pattern
+    static PathRequestManager instance;
+
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
     PathRequest currentPathRequest;
     Pathfinding pathFinding;
 
     bool isProcessingPath;
-
-    static PathRequestManager instance;
 
     void Awake() {
         instance = this;
@@ -23,12 +24,6 @@ public class PathRequestManager : MonoBehaviour {
         instance.TryProcessNext();
     }
 
-    public void FinishedProcessingPath(Vector3[] path, bool success) {
-        currentPathRequest.callback(path, success);
-        isProcessingPath = false;
-        TryProcessNext();
-    }
-
     void TryProcessNext() {
         if (!isProcessingPath && pathRequestQueue.Count > 0) {
             currentPathRequest = pathRequestQueue.Dequeue();
@@ -36,9 +31,13 @@ public class PathRequestManager : MonoBehaviour {
             pathFinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
     }
+
+    public void FinishedProcessingPath(Vector3[] path, bool success) {
+        currentPathRequest.callback(path, success);
+        isProcessingPath = false;
+        TryProcessNext();
+    }
     
-
-
     struct PathRequest {
         public Vector3 pathStart;
         public Vector3 pathEnd;
