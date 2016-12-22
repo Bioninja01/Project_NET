@@ -9,27 +9,24 @@ public class NPC_PathController : MonoBehaviour {
     NPC_OnPath npc;
 
     public void OnEnable() {
-        NPC_OnPath.Action += MoveToNextTarget;
+        NPC_OnPath.MoveToNextTarget += MoveToNextTarget;
     }
     public void OnDisable() {
-        NPC_OnPath.Action -= MoveToNextTarget;
+        NPC_OnPath.MoveToNextTarget -= MoveToNextTarget;
     }
 
     // Use this for initialization
     void Start () {
         npc = GetComponent<NPC_OnPath>();
-        if(targets.Count > 0) {
-            npc.target = targets[0];
-            npc.FindTarget();
-        }
+        MoveToNextTarget();
 	}
 
     public void MoveToNextTarget() {
-        index++;
-        if(index >= targets.ToArray().Length) {
+        if(index >= targets.Count) {
             index = 0;
         }
         npc.target = targets[index];
         npc.FindTarget();
+        index++;
     }
 }

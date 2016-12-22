@@ -51,6 +51,8 @@ public class Charater : MonoBehaviour {
             npcs.Remove(other.gameObject);
         }
     }
+
+
     void Update() {
         switch (state) {
             case CharState.NORMAL:
@@ -61,13 +63,10 @@ public class Charater : MonoBehaviour {
         }
     }
 
-    public void ResetPosition() {
-        transform.rotation = oldRotation;
-    }
     private void NormalMove() {
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 190.0f;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * 10.0f;
-        if(x != 0 || z != 0) {
+        if (x != 0 || z != 0) {
             Walk();
         }
         transform.Rotate(0, x, 0);
@@ -88,6 +87,10 @@ public class Charater : MonoBehaviour {
         else {
             axisInUse = false;
         }
+    }
+
+    public void ResetPosition() {
+        transform.rotation = oldRotation;
     }
 
 }

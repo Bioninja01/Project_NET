@@ -5,7 +5,7 @@ using System.Collections;
 public class NPC_OnPath : NPC {
 
     public delegate void fishedPathAction();
-    public static event fishedPathAction Action;
+    public static event fishedPathAction MoveToNextTarget;
 
     public Transform target;
     public float speed = 1;
@@ -16,13 +16,11 @@ public class NPC_OnPath : NPC {
             return fishedPath;
         }
     }
-
     Vector3[] path;
     int targetIndex;
 
-
-
     public void FindTarget() {
+        targetIndex = 0;
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
@@ -37,22 +35,27 @@ public class NPC_OnPath : NPC {
 
     IEnumerator FollowPath() {
         if (path.Length != 0) {
+            
             Vector3 currentWaypoint = path[0];
+            Vector3 v3;
             while (true) {
+                v3 = new Vector3(currentWaypoint.x, transform.position.y, currentWaypoint.z);
                 if (state == NPC.NPC_state.STAY) {
                     yield return null;
                     continue;
                 }
-                if (transform.position == currentWaypoint) {
+                if (transform.position == v3) {
                     targetIndex++;
                     if (targetIndex >= path.Length) {
                         fishedPath = true;
-                        Action();
+                        MoveToNextTarget();
                         yield break;
                     }
                     currentWaypoint = path[targetIndex];
+                    v3 = new Vector3(currentWaypoint.x, transform.position.y, currentWaypoint.z);
                 }
-                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, v3, speed * Time.deltaTime);
+                transform.LookAt(v3);
                 yield return null;
             }
         }

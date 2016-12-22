@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour {
     }
     
     public void FindTarget() {
+        targetIndex = 0;
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 

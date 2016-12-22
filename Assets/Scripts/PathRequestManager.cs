@@ -24,18 +24,18 @@ public class PathRequestManager : MonoBehaviour {
         instance.TryProcessNext();
     }
 
+    public void FinishedProcessingPath(Vector3[] path, bool success) {
+        currentPathRequest.callback(path, success);
+        isProcessingPath = false;
+        TryProcessNext();
+    }
+
     void TryProcessNext() {
         if (!isProcessingPath && pathRequestQueue.Count > 0) {
             currentPathRequest = pathRequestQueue.Dequeue();
             isProcessingPath = true;
             pathFinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
-    }
-
-    public void FinishedProcessingPath(Vector3[] path, bool success) {
-        currentPathRequest.callback(path, success);
-        isProcessingPath = false;
-        TryProcessNext();
     }
     
     struct PathRequest {
