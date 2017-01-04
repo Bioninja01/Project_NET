@@ -35,11 +35,10 @@ public class NPC_OnPath : NPC {
 
     IEnumerator FollowPath() {
         if (path.Length != 0) {
-            
             Vector3 currentWaypoint = path[0];
             Vector3 v3;
+            v3 = new Vector3(currentWaypoint.x, transform.position.y, currentWaypoint.z);
             while (true) {
-                v3 = new Vector3(currentWaypoint.x, transform.position.y, currentWaypoint.z);
                 if (state == NPC.NPC_state.STAY) {
                     yield return null;
                     continue;
@@ -61,6 +60,17 @@ public class NPC_OnPath : NPC {
         }
     }
 
+    public override void RevertState() {
+        switch (state) {
+            case NPC_state.STAY:
+                animator.SetFloat("NPC_State", 0);
+                break;
+            case NPC_state.MOVE:
+                animator.SetFloat("NPC_State", 1);
+                break;
+        }
+    }
+
     public void OnDrawGizmos() {
         if (path != null) {
             Gizmos.color = Color.black;
@@ -75,5 +85,4 @@ public class NPC_OnPath : NPC {
             }
         }
     }
-
 }

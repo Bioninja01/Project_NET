@@ -8,6 +8,7 @@ public class NPC : MonoBehaviour {
     public List<string> dialog;
 
     Quaternion oldPosition;
+    [HideInInspector] public Animator animator;
 
     public enum NPC_state {
         MOVE,
@@ -15,7 +16,7 @@ public class NPC : MonoBehaviour {
         ACTION
     }
     public NPC_state state;
-    NPC_state oldState;
+    [HideInInspector] public NPC_state oldState;
 
     // Use this for initialization
     void Start() {
@@ -27,17 +28,46 @@ public class NPC : MonoBehaviour {
             }
         }
         oldPosition = transform.rotation;
+        animator = GetComponent<Animator>();
+        switch (state) {
+            case NPC_state.STAY:
+                animator.SetFloat("NPC_State", 0);
+                break;
+            case NPC_state.MOVE:
+                animator.SetFloat("NPC_State", 1);
+                break;
+        }
     }
 
     public string printDialog(int i) {
         if (i >= dialog.Count || i < 0) {
             return null;
         }
-        state = NPC_state.STAY;
         return dialog[i];
     }
     public void ResetPosition() {
         transform.rotation = oldPosition;
     }
 
+    public void ChangeState(NPC_state s) {
+        switch (s) {
+            case NPC_state.STAY:
+                animator.SetFloat("NPC_State", 0);
+                break;
+            case NPC_state.MOVE:
+                animator.SetFloat("NPC_State", 1);
+                break;
+        }
+    }
+    public virtual void RevertState() {
+        print("oldstate:" + oldState);
+        switch (state) {
+            case NPC_state.STAY:
+                animator.SetFloat("NPC_State", 0);
+                break;
+            case NPC_state.MOVE:
+                animator.SetFloat("NPC_State", 1);
+                break;
+        }
+    }
 }

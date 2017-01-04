@@ -30,31 +30,35 @@ public class DialogSystem : MonoBehaviour {
     }
 
     public void OnEnable() {
-        Charater.Talk += StartTalkCoroutine;
+        PlayerControllerV2.Talk += StartTalkCoroutine;
     }
     public void OnDisable() {
-        Charater.Talk -= StartTalkCoroutine;
+        PlayerControllerV2.Talk -= StartTalkCoroutine;
     }
 
-    private void StartTalkCoroutine(Charater c, GameObject go) {
+    private void StartTalkCoroutine(PlayerControllerV2 pc, GameObject go) {
         NPC npc = go.GetComponent<NPC>();
-        StartCoroutine(TalkCoroutine(KeyCode.G, c, npc));
+        StartCoroutine(TalkCoroutine(KeyCode.G, pc, npc));
     }
-    IEnumerator TalkCoroutine(KeyCode keyCode, Charater c, NPC npc) {
+    IEnumerator TalkCoroutine(KeyCode keyCode, PlayerControllerV2 pc, NPC npc) {
         int i = 0;
         ShowDialogUi();
         imageCon1.SetActive(true);
         imageCon1.GetComponent<Image>().sprite = npc.img;
         dialog.text = npc.printDialog(i);
         i++;
+        npc.oldState = npc.state;
+        npc.state = NPC.NPC_state.STAY;
         while (true) {
+            npc.ChangeState(NPC.NPC_state.STAY);
             if (Input.GetKeyDown(keyCode)) {
                 if (npc.printDialog(i) == null) {
                     HideDialogUi();
-                    c.state = Charater.CharState.NORMAL;
+                    pc.state = PlayerControllerV2.CharState.NORMAL;
                     if (npc != null) {
                         npc.ResetPosition();
-                        c.ResetPosition();
+                        pc.ResetPosition();
+                        npc.RevertState();
                     }
                     break;
                 }
@@ -63,13 +67,17 @@ public class DialogSystem : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.X)) {
                 HideDialogUi();
-                c.state = Charater.CharState.NORMAL;
+                pc.state = PlayerControllerV2.CharState.NORMAL;
                 if (npc != null) {
                     npc.ResetPosition();
+                    npc.RevertState();
                 }
                 break;
             }
             yield return null;
         }
+        npc.state = npc.oldState;
+        npc.RevertState();
     }
+
 }

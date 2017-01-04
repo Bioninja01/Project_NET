@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BattleArea.unity
+- path: Assets/Scenes/dailogStaging.unity
   isLoaded: 1
   isActive: 1
