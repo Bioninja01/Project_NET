@@ -12,10 +12,12 @@ public class BattleMovement : CharaterBattle {
     Transform tr;
 
     AudioClip shoot;
+    BattleChip battleChip;
 
     public int[,] grid;
     BattleGrid bg;
     bool canWalk = false;
+    bool finishedWalking = true;
     GridPostion gridPosition = new GridPostion(0, 1);
 
 
@@ -28,65 +30,68 @@ public class BattleMovement : CharaterBattle {
         bg = GameObject.FindGameObjectWithTag("BattleArea").GetComponent<BattleGrid>();
         shoot = Resources.Load("Music/shoot1") as AudioClip;
         damage = Resources.Load("Music/Hit1") as AudioClip;
+        battleChip = GetComponent<BattleChip>();
     }
     // Update is called once per frame
     void Update() {
-
         if (Input.GetKeyDown(KeyCode.Space)) {
-            GameObject bullet = Instantiate(projectile, (pos+ Vector3.right * (mag-.5F)), Quaternion.identity) as GameObject;
+            GameObject bullet = Instantiate(projectile, (pos + tr.forward * (mag - .5F)), Quaternion.identity) as GameObject;
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 2250);
-            music.PlayOneShot(shoot,.5f);
+            music.PlayOneShot(shoot, .5f);
         }
+        if (Input.GetKeyDown(KeyCode.F)) { battleChip.Atk(this); }
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { tr.eulerAngles = new Vector3(0, 0, 0); }
+        if (Input.GetKeyDown(KeyCode.DownArrow)) { tr.eulerAngles = new Vector3(0, 180, 0); }
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) { tr.eulerAngles = new Vector3(0, -90, 0); }
+        if (Input.GetKeyDown(KeyCode.RightArrow)) { tr.eulerAngles = new Vector3(0, 90, 0); }
 
-        if (Input.GetKey(KeyCode.RightArrow) && tr.position == pos) {
-            if (!(gridPosition.x >= bg.size[0] - 1)) {
+        if (finishedWalking) {
+           if (Input.GetKey(KeyCode.D) && tr.position == pos) {
                 canWalk = (Physics.CheckSphere(pos + ((Vector3.right + Vector3.down / 2) * mag), 1f));
                 if (canWalk) {
                     gridPosition.x++;
                     pos += Vector3.right * mag;
+                    finishedWalking = false;
                 }
             }
-            else if (gridPosition.x > bg.size[0] - 1) {
-                return;
-            }
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow) && tr.position == pos) {
-            if (!(gridPosition.x <= 0)) {
+            else if (Input.GetKey(KeyCode.A) && tr.position == pos) {
                 canWalk = (Physics.CheckSphere(pos + ((Vector3.left + Vector3.down / 2) * mag), 1f));
                 if (canWalk) {
                     gridPosition.x--;
                     pos += Vector3.left * mag;
+                    finishedWalking = false;
                 }
             }
-            else if (gridPosition.x < 0) {
-                return;
-            }
-        }
-        else if (Input.GetKey(KeyCode.UpArrow) && tr.position == pos) {
-            if (!(gridPosition.y <= 0)) {
+            else if (Input.GetKey(KeyCode.W) && tr.position == pos) {
                 canWalk = (Physics.CheckSphere(pos + ((Vector3.forward + Vector3.down / 2) * mag), 1f));
                 if (canWalk) {
                     gridPosition.y--;
                     pos += Vector3.forward * mag;
+                    finishedWalking = false;
                 }
+
             }
-            else if (gridPosition.y < 0) {
-                return;
-            }
-        }
-        else if (Input.GetKey(KeyCode.DownArrow) && tr.position == pos) {
-            if (!(gridPosition.y >= bg.size[1] / 2 - 1)) {
+            else if (Input.GetKey(KeyCode.S) && tr.position == pos) {
                 canWalk = (Physics.CheckSphere(pos + ((Vector3.back + Vector3.down / 2) * mag), 1f));
                 if (canWalk) {
                     gridPosition.y++;
                     pos += Vector3.back * mag;
+                    finishedWalking = false;
                 }
             }
-            else if (gridPosition.y > bg.size[1] / 2 - 1) {
-                return;
+        }
+        if(pos != transform.position) {
+            transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+            if (transform.position == pos) {
+                InvokeRepeating("test", .1f, .3f);
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+        
+    }
+    void test() {
+        finishedWalking = true;
+
+        CancelInvoke();
     }
 
     void OnDrawGizmos() {

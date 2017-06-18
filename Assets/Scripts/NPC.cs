@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 
 public class NPC : MonoBehaviour {
-    public Sprite img;
+    public Sprite img; // Character Portrait
     public TextAsset dialogTXT;
-    [HideInInspector]
-    public List<string> dialog;
+    [HideInInspector] public List<string> dialog;
 
     Quaternion oldPosition;
     [HideInInspector] public Animator animator;
@@ -15,6 +14,7 @@ public class NPC : MonoBehaviour {
         STAY,
         ACTION
     }
+
     public NPC_state state;
     [HideInInspector] public NPC_state oldState;
 

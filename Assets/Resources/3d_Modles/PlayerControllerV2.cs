@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class PlayerControllerV2 : MonoBehaviour {
+    public Sprite img;
     public float walkSpeed = 2f;
     public float runSpeed = 6f;
     public float movementAngleOffset = 45f;
@@ -15,8 +16,6 @@ public class PlayerControllerV2 : MonoBehaviour {
 
     public delegate void WalkAction();
     public static event WalkAction Walk;
-
-
 
     public enum CharState {
         NORMAL,
