@@ -39,6 +39,12 @@ public class NPC : MonoBehaviour {
         }
     }
 
+    public bool waitForChoise(int i) {
+        if(i >= dialog.Count) { return false; }
+        string[] choises = dialog[i].Split(' ');
+        if( choises[0] == "choises:") { return true; }
+        return false;
+    }
     public string printDialog(int i) {
         if (i >= dialog.Count || i < 0) {
             return null;
@@ -60,7 +66,6 @@ public class NPC : MonoBehaviour {
         }
     }
     public virtual void RevertState() {
-        print("oldstate:" + oldState);
         switch (state) {
             case NPC_state.STAY:
                 animator.SetFloat("NPC_State", 0);

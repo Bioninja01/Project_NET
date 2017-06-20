@@ -81,7 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Database\DB_Test.cs" />
     <Compile Include="Assets\Resources\3d_Modles\NPC_Controller.cs" />
     <Compile Include="Assets\Resources\3d_Modles\PlayerController.cs" />
     <Compile Include="Assets\Resources\3d_Modles\PlayerControllerV2.cs" />
@@ -101,6 +100,7 @@
     <Compile Include="Assets\Scripts\DialogSystem\DialogStep.cs" />
     <Compile Include="Assets\Scripts\DialogSystem\DialogSystem.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Graphics\ReNomals.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\Heap.cs" />
     <Compile Include="Assets\Scripts\IteamColletor.cs" />

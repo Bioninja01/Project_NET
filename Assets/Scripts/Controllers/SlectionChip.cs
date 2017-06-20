@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SlectionChip : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class SlectionChip : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if(index < parent.childCount - 1) {
                 index++;
                 transform.SetParent(parent.GetChild(index));
@@ -25,7 +26,7 @@ public class SlectionChip : MonoBehaviour {
                 music.PlayOneShot(select);
             }
         }
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             if (index > 0) {
                 index--;
                 transform.SetParent(parent.GetChild(index));
@@ -33,5 +34,13 @@ public class SlectionChip : MonoBehaviour {
                 music.PlayOneShot(select);
             }
         }
+    }
+
+    public string getSelection() {
+        Text t = transform.parent.GetComponentInChildren<Text>();
+        if(t != null) {
+            return t.text;
+        }
+        return null;
     }
 }
