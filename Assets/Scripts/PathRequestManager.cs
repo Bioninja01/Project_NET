@@ -4,13 +4,14 @@ using System;
 
 public class PathRequestManager : MonoBehaviour {
 
+    //Change to the true singleTon Pattern
+    static PathRequestManager instance;
+
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
     PathRequest currentPathRequest;
     Pathfinding pathFinding;
 
     bool isProcessingPath;
-
-    static PathRequestManager instance;
 
     void Awake() {
         instance = this;
@@ -37,8 +38,6 @@ public class PathRequestManager : MonoBehaviour {
         }
     }
     
-
-
     struct PathRequest {
         public Vector3 pathStart;
         public Vector3 pathEnd;

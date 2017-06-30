@@ -8,13 +8,14 @@ public class Unit : MonoBehaviour {
     int targetIndex;
 
     public virtual void OnEnable() {
-        Charater.Walk += FindTarget;
+        PlayerControllerV2.Walk += FindTarget;
     }
     public virtual void OnDisable() {
-        Charater.Walk -= FindTarget;
+        PlayerControllerV2.Walk -= FindTarget;
     }
     
     public void FindTarget() {
+        targetIndex = 0;
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 

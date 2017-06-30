@@ -108,10 +108,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Project_NET.CSharp.Plugins.csproj">
-      <Project>{3831CF7B-946C-BE54-B7C5-44D756B959DD}</Project>
-      <Name>Project_NET.CSharp.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="Project_NET.CSharp.csproj">
       <Project>{DA07727A-CCD4-6587-EE7C-247E0F399C07}</Project>
       <Name>Project_NET.CSharp</Name>
@@ -123,9 +119,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Dialog\DevDialog_Girl.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Material\DevShader.shader" />
+    <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

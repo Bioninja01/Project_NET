@@ -67,7 +67,6 @@ public class Pathfinding : MonoBehaviour {
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
     }
 
-
     /*Helper Functions*/
     private Vector3[] RetracePath(Node startNode, Node endNode) {
         List<Node> path = new List<Node>();
