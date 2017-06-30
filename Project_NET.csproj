@@ -103,8 +103,6 @@
     <Compile Include="Assets\Scripts\Controllers\UiFollow.cs" />
     <Compile Include="Assets\Scripts\DB\DB_Test.cs" />
     <Compile Include="Assets\Scripts\DeBugLine.cs" />
-    <Compile Include="Assets\Scripts\DialogSystem\Dialog.cs" />
-    <Compile Include="Assets\Scripts\DialogSystem\DialogStep.cs" />
     <Compile Include="Assets\Scripts\DialogSystem\DialogSystem.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\Graphics\ReNomals.cs" />

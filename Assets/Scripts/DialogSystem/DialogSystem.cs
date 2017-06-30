@@ -95,7 +95,11 @@ public class DialogSystem : MonoBehaviour {
                         if (choiceAndlocation[0] == slection.getSelection()) {
                             lineNumber = Int32.Parse(choiceAndlocation[1]);
                             // linenumber-1 because .txt file is not zero index. 
-                            dialog.text = npc.printDialog(lineNumber-1); 
+                            dialog.text = npc.printDialog(lineNumber-1);
+                            //TODO: play animation based on playerchosie, then displat texbox.
+                            //HideDialogUi();
+                            //pc.GetComponent<Animator>().Play("Walk", 0);
+                           // yield return new WaitUntil(() => Time.C >= 10);
                         }
                     }
                     choiceFlag = false;
@@ -122,8 +126,13 @@ public class DialogSystem : MonoBehaviour {
         npc.RevertState();
     }
 
-    void ProformAction() {
+    void ProformAction(PlayerControllerV2 pc, int clipNumber) {
+        Animator animator = pc.GetComponent<Animator>();
+        AnimationClip clip = animator.runtimeAnimatorController.animationClips[clipNumber];
+        AnimationEvent evt = new AnimationEvent();
+        evt.time = clip.length;
 
+        animator.Play("Walk", 0);
     }
 
     

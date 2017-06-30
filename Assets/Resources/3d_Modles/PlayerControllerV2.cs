@@ -39,6 +39,7 @@ public class PlayerControllerV2 : MonoBehaviour {
         animator = GetComponent<Animator>();
         npcs = new List<GameObject>();
         rd = GetComponent<Rigidbody>();
+       
     }
 
     void OnTriggerStay(Collider other) {
