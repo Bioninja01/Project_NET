@@ -33,6 +33,7 @@ public class PlayerControllerV2 : MonoBehaviour {
     Quaternion oldRotation;
 
     Animator animator;
+    
     // Use this for initialization
     void Awake() {
         animator = GetComponent<Animator>();
@@ -65,14 +66,14 @@ public class PlayerControllerV2 : MonoBehaviour {
     void Update() {
         switch (state) {
             case CharState.NORMAL:
-                NormalMove();
+                Move();
                 break;
             case CharState.TALKING:
                 break;
         }
     }
 
-    void NormalMove() {
+    void Move() {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
@@ -87,7 +88,13 @@ public class PlayerControllerV2 : MonoBehaviour {
         if(inputDir.magnitude != 0) {
             Walk();
         }
-
+        float animationSpeed = ((running) ? 1f : .5f) * inputDir.magnitude;
+        SetAnimation("SpeedPersent", animationSpeed);
+        InitTalkingComand();
+        axisInUse = false;
+    }
+    
+    void InitTalkingComand() {
         if (Input.GetAxis("Submit") != 0) {
             if (axisInUse == false) {
                 axisInUse = true;
@@ -96,17 +103,17 @@ public class PlayerControllerV2 : MonoBehaviour {
                     transform.LookAt(npcs[0].transform.position);
                     npcs[0].transform.LookAt(transform.position);
                     state = CharState.TALKING;
+                    SetAnimation("SpeedPersent", 0);
                     Talk(this, npcs[0]);    //start talking
                 }
             }
         }
-        else {
-            axisInUse = false;
-        }
-        float animationSpeed = ((running) ? 1f : .5f) * inputDir.magnitude;
-        animator.SetFloat("SpeedPersent", animationSpeed);
     }
 
+    public void SetAnimation(string name,float animationNumber) {
+        animator.SetFloat(name, animationNumber);
+    }
+    
     public void ResetPosition() {
         transform.rotation = oldRotation;
     }
