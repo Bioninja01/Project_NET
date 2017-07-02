@@ -97,9 +97,9 @@ public class DialogSystem : MonoBehaviour {
                             // linenumber-1 because .txt file is not zero index. 
                             dialog.text = npc.printDialog(lineNumber-1);
                             //TODO: play animation based on playerchosie, then displat texbox.
-                            //HideDialogUi();
-                            //pc.GetComponent<Animator>().Play("Walk", 0);
-                           // yield return new WaitUntil(() => Time.C >= 10);
+                            HideDialogUi();
+                            pc.GetComponent<Animator>().Play("Walk", 0);
+                            // yield return new WaitUntil(() => Time.C >= 10);
                         }
                     }
                     choiceFlag = false;
