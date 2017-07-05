@@ -148,9 +148,9 @@
     <Compile Include="Assets\Editor\PathCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Dialog\DevDialog_Girl.txt" />
-    <None Include="Assets\Dialog\DevDialog_Girl_newJob.txt" />
     <None Include="Assets\Material\DevShader.shader" />
+    <None Include="Assets\Resources\Dialog\DevDialog_Girl.txt" />
+    <None Include="Assets\Resources\Dialog\DevDialog_Girl_newJob.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

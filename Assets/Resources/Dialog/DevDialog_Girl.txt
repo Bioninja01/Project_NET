@@ -1,4 +1,4 @@
 girl1: Hello can I help you?
 girl1: No? Ok, By then.
-choises: Talk:4 useItem:10 useGun:1
+choises: Talk:4 UseItem:10 UseGun:1
 girl1: Wiedo!!!

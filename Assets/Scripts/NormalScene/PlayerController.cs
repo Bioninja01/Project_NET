@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class PlayerControllerV2 : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     public Sprite img;
     public float walkSpeed = 2f;
     public float runSpeed = 6f;
@@ -11,7 +11,7 @@ public class PlayerControllerV2 : MonoBehaviour {
     public float turnSmoothTime = 0.2f;
     float turnSmoothVelocity;
 
-    public delegate void TalkAction(PlayerControllerV2 pc, GameObject go);
+    public delegate void TalkAction(PlayerController pc, GameObject go);
     public static event TalkAction Talk;
 
     public delegate void WalkAction();

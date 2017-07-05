@@ -9,14 +9,14 @@ public class ReNomals : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other) {
         if (other.isTrigger) { return; }
-        if (other.gameObject.name == "DevPlayer") {
+        if (other.gameObject.tag == "Player") {
             ReversFace();
         }
     }
 
     private void OnTriggerExit(Collider other) {
         if (other.isTrigger) { return; }
-        if (other.gameObject.name == "DevPlayer") {
+        if (other.gameObject.tag == "Player") {
             ReversFace();
         }
     }

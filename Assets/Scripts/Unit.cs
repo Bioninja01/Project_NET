@@ -8,10 +8,10 @@ public class Unit : MonoBehaviour {
     int targetIndex;
 
     public virtual void OnEnable() {
-        PlayerControllerV2.Walk += FindTarget;
+        PlayerController.Walk += FindTarget;
     }
     public virtual void OnDisable() {
-        PlayerControllerV2.Walk -= FindTarget;
+        PlayerController.Walk -= FindTarget;
     }
     
     public void FindTarget() {

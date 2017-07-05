@@ -34,7 +34,7 @@ public class PlayerControllerV3 : MonoBehaviour {
 
         float animationSpeed = ((running) ? 1f : .5f) * inputDir.magnitude;
      
-        animator.SetFloat("speedPercent", animationSpeed);
+        animator.SetFloat("SpeedPercent", animationSpeed);
       
     }
 }

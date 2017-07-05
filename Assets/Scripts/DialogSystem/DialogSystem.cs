@@ -39,20 +39,20 @@ public class DialogSystem : MonoBehaviour {
     }
     //Delegets
     public void OnEnable() {
-        PlayerControllerV2.Talk += StartTalkCoroutine;
+        PlayerController.Talk += StartTalkCoroutine;
     }
     public void OnDisable() {
-        PlayerControllerV2.Talk -= StartTalkCoroutine;
+        PlayerController.Talk -= StartTalkCoroutine;
     }
 
 /*Main Logic of DialogSystem*/
-    private void StartTalkCoroutine(PlayerControllerV2 pc, GameObject go) {
+    private void StartTalkCoroutine(PlayerController pc, GameObject go) {
         NPC npc = go.GetComponent<NPC>();
         if(npc != null) {
             StartCoroutine(TalkCoroutine( pc, npc));
         }
     }
-    IEnumerator TalkCoroutine( PlayerControllerV2 pc, NPC npc) {
+    IEnumerator TalkCoroutine( PlayerController pc, NPC npc) {
         int lineNumber = 0;
         ShowDialogUi();
         imageCon1.SetActive(true);
@@ -76,11 +76,11 @@ public class DialogSystem : MonoBehaviour {
                 choiceFlag = true;
                 lineNumber++;
             }
-            //Progress dialog
+//Progress dialog
             if (Input.GetKeyDown(KeyCode.G)) {
                 if (npc.printDialog(lineNumber) == null) {
                     HideDialogUi();
-                    pc.state = PlayerControllerV2.CharState.NORMAL;
+                    pc.state = PlayerController.CharState.NORMAL;
                     if (npc != null) {
                         npc.ResetPosition();
                         pc.ResetPosition();
@@ -88,18 +88,21 @@ public class DialogSystem : MonoBehaviour {
                     }
                     break;
                 }
-                //Enter choise
+//Player choices Action
                 if (choiceFlag) {
                     for (int index = 1; index < options.Length; index++) {
                         string[] choiceAndlocation = options[index].Split(':');
                         if (choiceAndlocation[0] == slection.getSelection()) {
                             lineNumber = Int32.Parse(choiceAndlocation[1]);
-                            // linenumber-1 because .txt file is not zero index. 
-                            dialog.text = npc.printDialog(lineNumber-1);
-                            //TODO: play animation based on playerchosie, then displat texbox.
-                            HideDialogUi();
-                            pc.GetComponent<Animator>().Play("Walk", 0);
-                            // yield return new WaitUntil(() => Time.C >= 10);
+                            dialog.text = npc.printDialog(lineNumber-1);  // linenumber-1 because .txt file is not zero index. 
+
+                            HideDialogUi();                      
+                            Animator animator = pc.GetComponent<Animator>();
+                            animator.Play(choiceAndlocation[0], 0);
+                            yield return new WaitForEndOfFrame(); // have to wait for the animator to change the animationClip.
+                            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // wait for the animation to finish.
+
+                            ShowDialogUi();                            
                         }
                     }
                     choiceFlag = false;
@@ -110,10 +113,10 @@ public class DialogSystem : MonoBehaviour {
                     lineNumber++;
                 } 
             }
-            // End dialog 
+// End dialog 
             if (Input.GetKeyDown(KeyCode.X)) {
                 HideDialogUi();
-                pc.state = PlayerControllerV2.CharState.NORMAL;
+                pc.state = PlayerController.CharState.NORMAL;
                 if (npc != null) {
                     npc.ResetPosition();
                     npc.RevertState();
@@ -124,9 +127,10 @@ public class DialogSystem : MonoBehaviour {
         }
         npc.state = npc.oldState;
         npc.RevertState();
+        pc.GetComponent<Animator>().Play("BackToNormal", 0);
     }
 
-    void ProformAction(PlayerControllerV2 pc, int clipNumber) {
+    void ProformAction(PlayerController pc, int clipNumber) {
         Animator animator = pc.GetComponent<Animator>();
         AnimationClip clip = animator.runtimeAnimatorController.animationClips[clipNumber];
         AnimationEvent evt = new AnimationEvent();

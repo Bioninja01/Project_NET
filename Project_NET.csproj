@@ -113,7 +113,7 @@
     <Compile Include="Assets\Scripts\NormalScene\NPC_Controller.cs" />
     <Compile Include="Assets\Scripts\NormalScene\NPC_OnPath.cs" />
     <Compile Include="Assets\Scripts\NormalScene\NPC_PathController.cs" />
-    <Compile Include="Assets\Scripts\NormalScene\PlayerControllerV2.cs" />
+    <Compile Include="Assets\Scripts\NormalScene\PlayerController.cs" />
     <Compile Include="Assets\Scripts\NormalScene\PlayerControllerV3.cs" />
     <Compile Include="Assets\Scripts\PathRequestManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding.cs" />
@@ -123,9 +123,9 @@
     <Compile Include="Assets\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Dialog\DevDialog_Girl.txt" />
-    <None Include="Assets\Dialog\DevDialog_Girl_newJob.txt" />
     <None Include="Assets\Material\DevShader.shader" />
+    <None Include="Assets\Resources\Dialog\DevDialog_Girl.txt" />
+    <None Include="Assets\Resources\Dialog\DevDialog_Girl_newJob.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
