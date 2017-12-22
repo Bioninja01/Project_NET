@@ -5,10 +5,8 @@ public class NPC : MonoBehaviour {
     public Sprite img; // Character Portrait
     public TextAsset dialogTXT;
     [HideInInspector] public List<string> dialog;
-
     Quaternion oldPosition;
     [HideInInspector] public Animator animator;
-
     public enum NPC_state {
         MOVE,
         STAY,
@@ -17,6 +15,7 @@ public class NPC : MonoBehaviour {
 
     public NPC_state state;
     [HideInInspector] public NPC_state oldState;
+    public bool canLookAtPlayer = true;
 
     // Use this for initialization
     void Start() {

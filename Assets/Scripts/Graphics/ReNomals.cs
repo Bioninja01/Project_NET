@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ReNomals : MonoBehaviour {
 
+    public Transform targetMesh;
 	// Use this for initialization
 	void Start () {
     }
@@ -22,7 +23,7 @@ public class ReNomals : MonoBehaviour {
     }
 
     public void ReversFace() {
-        var mesh = GetComponent<MeshFilter>().mesh;
+        var mesh = targetMesh.GetComponent<MeshFilter>().mesh;
         var indices = mesh.triangles;
         var triangleCount = indices.Length / 3;
         for (var i = 0; i < triangleCount; i++) {

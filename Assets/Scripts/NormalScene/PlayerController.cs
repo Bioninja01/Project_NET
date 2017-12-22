@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour {
         rd = GetComponent<Rigidbody>();
        
     }
-
     void OnTriggerStay(Collider other) {
         Vector3 distance2Other = other.gameObject.transform.position - transform.position;
         float angle = Vector3.Angle(distance2Other, transform.TransformDirection(Vector3.forward));
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour {
             npcs.Remove(other.gameObject);
         }
     }
-
     void Update() {
         switch (state) {
             case CharState.NORMAL:
@@ -87,14 +85,13 @@ public class PlayerController : MonoBehaviour {
         float speed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
         if(inputDir.magnitude != 0) {
-            Walk();
+           // Walk();
         }
         float animationSpeed = ((running) ? 1f : .5f) * inputDir.magnitude;
         SetAnimation("SpeedPersent", animationSpeed);
         InitTalkingComand();
         axisInUse = false;
-    }
-    
+    }  
     void InitTalkingComand() {
         if (Input.GetAxis("Submit") != 0) {
             if (axisInUse == false) {
@@ -102,7 +99,9 @@ public class PlayerController : MonoBehaviour {
                 if (npcs.Count > 0) {
                     oldRotation = transform.rotation;
                     transform.LookAt(npcs[0].transform.position);
-                    npcs[0].transform.LookAt(transform.position);
+                    if (npcs[0].GetComponent<NPC>().canLookAtPlayer) {
+                        npcs[0].transform.LookAt(transform.position);
+                    }
                     state = CharState.TALKING;
                     SetAnimation("SpeedPersent", 0);
                     Talk(this, npcs[0]);    //start talking

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using System.Text;
 
 public class DialogSystem : MonoBehaviour {
 
@@ -60,6 +61,8 @@ public class DialogSystem : MonoBehaviour {
         imageCon2.SetActive(true);
         imageCon2.GetComponent<Image>().sprite = pc.img;
         dialog.text = npc.printDialog(lineNumber);
+        ChangeTextColor_CharText(dialog, dialog.text);
+        FixString(dialog.text);
         lineNumber++;
         npc.oldState = npc.state;
         npc.state = NPC.NPC_state.STAY;
@@ -95,7 +98,7 @@ public class DialogSystem : MonoBehaviour {
                         if (choiceAndlocation[0] == slection.getSelection()) {
                             lineNumber = Int32.Parse(choiceAndlocation[1]);
                             dialog.text = npc.printDialog(lineNumber-1);  // linenumber-1 because .txt file is not zero index. 
-
+                            FixString(dialog.text);
                             HideDialogUi();                      
                             Animator animator = pc.GetComponent<Animator>();
                             animator.Play(choiceAndlocation[0], 0);
@@ -110,6 +113,7 @@ public class DialogSystem : MonoBehaviour {
                 }
                 else {
                     dialog.text = npc.printDialog(lineNumber);
+                    FixString(dialog.text);
                     lineNumber++;
                 } 
             }
@@ -139,5 +143,24 @@ public class DialogSystem : MonoBehaviour {
         animator.Play("Walk", 0);
     }
 
+    void ChangeTextColor_CharText(Text t, string s) {
+        string[] words = s.Split(' ');
+        if ( words[0] == "HomelessMan:") {
+            print("Here:1");
+            t.color = Color.white;  // White
+        }
+        else if (words[0] == "girl1:") {
+            print("Here:2");
+            t.color = Color.red; //Pink
+        }
+    }
+    void FixString(string s) {
+        string[] words = s.Split(' ');
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < words.Length; i++) {
+            sb.Append(words[i] + ' ');
+        }
+        dialog.text = sb.ToString();
+    }
     
 }

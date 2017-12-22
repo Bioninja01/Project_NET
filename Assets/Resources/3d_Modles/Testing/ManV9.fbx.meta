@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 9e0868f051223f14f9f6fc76d22ebd6a
+timeCreated: 1500162754
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Camera
+    100004: head
+    100006: head_end
+    100008: hip
+    100010: L,hand
+    100012: L,hand.002
+    100014: L,hand.002_end
+    100016: L,hand_end
+    100018: L.foot
+    100020: L.foot_end
+    100022: L.IK
+    100024: L.IK_end
+    100026: L.lower.arm
+    100028: L.lower.leg
+    100030: L.pull
+    100032: L.pull_end
+    100034: L.upper.arm
+    100036: L.upper.leg
+    100038: Lamp
+    100040: Man
+    100042: //RootNode
+    100044: R.foot
+    100046: R.foot_end
+    100048: R.IK
+    100050: R.IK_end
+    100052: R.lower.arm
+    100054: R.lower.leg
+    100056: R.pull
+    100058: R.pull_end
+    100060: R.upper.arm
+    100062: R.upper.leg
+    100064: Root
+    100066: spine
+    400000: Armature
+    400002: Camera
+    400004: head
+    400006: head_end
+    400008: hip
+    400010: L,hand
+    400012: L,hand.002
+    400014: L,hand.002_end
+    400016: L,hand_end
+    400018: L.foot
+    400020: L.foot_end
+    400022: L.IK
+    400024: L.IK_end
+    400026: L.lower.arm
+    400028: L.lower.leg
+    400030: L.pull
+    400032: L.pull_end
+    400034: L.upper.arm
+    400036: L.upper.leg
+    400038: Lamp
+    400040: Man
+    400042: //RootNode
+    400044: R.foot
+    400046: R.foot_end
+    400048: R.IK
+    400050: R.IK_end
+    400052: R.lower.arm
+    400054: R.lower.leg
+    400056: R.pull
+    400058: R.pull_end
+    400060: R.upper.arm
+    400062: R.upper.leg
+    400064: Root
+    400066: spine
+    4300000: Man
+    7400000: Armature|_Testing
+    7400002: Armature|FloorSit
+    7400004: Armature|Idel
+    7400006: Armature|Idel_Trans
+    7400008: Armature|LampAction
+    7400010: Armature|NiceRun
+    7400012: Armature|NiceWalk
+    7400014: Armature|NoPose
+    7400016: Armature|UseGun
+    7400018: Armature|UseIteam
+    7400020: Lamp|LampAction
+    9500000: //RootNode
+    13700000: Man
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
